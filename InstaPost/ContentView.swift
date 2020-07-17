@@ -90,6 +90,12 @@ func tabItemGroup(itemText: String, systemName: String) -> some View {
     
 }
 
+func getSystemImage(name systemName: String = "photo", color:Color = .primary) -> some View {
+    
+    getSystemImage(systemName, color, .body)
+}
+
+
 func getSystemImage(_ systemName: String = "photo", color:Color = .primary) -> some View {
     
     getSystemImage(systemName, color, .body)

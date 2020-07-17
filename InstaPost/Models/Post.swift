@@ -110,7 +110,7 @@ struct CommentToServer: Codable {
 }
 
 
-struct Post: Codable {
+struct Post: Codable, Equatable {
     
     var id: Int
     var image: Int

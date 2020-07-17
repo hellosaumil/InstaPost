@@ -31,12 +31,12 @@ struct PostView: View {
                     
                     if self.postID == nil {
                         
-                        getSystemImage("wifi.exclamationmark").padding(-4)
+                        getSystemImage(name: "wifi.exclamationmark").padding(-4)
                         Text("Connection Weak or Loading the Post...").font(.headline)
                         
                     } else {
                         
-                        getSystemImage("exclamationmark.square.fill").padding(-4)
+                        getSystemImage(name: "exclamationmark.square.fill").padding(-4)
                         //                            Text("Post not found for \( self.postText.first == "#" ? self.postText : "nickname "+self.postText).").font(.headline)
                         Text("Loading Post for post id \( self.postID ?? -1)").font(.headline)
                     }
@@ -49,7 +49,7 @@ struct PostView: View {
                 VStack(spacing: 10) {
                     
                     CustomImageView(image: self.$postImage)
-                        //                        .frame(width: UIScreen.main.bounds.width*0.95)
+                        .frame(width: UIScreen.main.bounds.width*0.95)
                         .onTapGesture { self.loadRemoteImage(of: self.postObject?.getImageId(), session: appSession) }
                     
                     RenderPostView(PostObj: self.$postObject, accentColor: .accentColor, emailBind: self.$emailBind, passwordBind: self.$passwordBind)
@@ -60,21 +60,21 @@ struct PostView: View {
                 //                    .onAppear { self.loadRemoteImage(of: self.postObject?.getImageId(), session: appSession) }
             }
         }
-            //            .frame(width: UIScreen.main.bounds.width)
+        .frame(width: UIScreen.main.bounds.width)
             
-            .onAppear(perform: {
-                
-                self.postObject = nil
-//                self.resetImage()
-                
-                //                DispatchQueue.main.async {
+        .onAppear(perform: {
+            
+            self.postObject = nil
+            self.resetImage()
+            
+            DispatchQueue.main.async {
                 
                 if let validPostID: Int = self.postID {
                     
                     self.loadPost(of: validPostID)
                 }
-                //                }
-            })
+            }
+        })
     }
     
     func loadPost(of postID: Int, key: String = "post") {
